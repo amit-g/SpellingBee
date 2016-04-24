@@ -133,7 +133,7 @@ function loadWordsFromGoogleSheet(publishedUrl){
         console.log("Invalid Url");
     }
     
-    var feedUrlTemplate = "http://spreadsheets.google.com/feeds/cells/{key}/od6/public/basic?alt=json&callback=?";
+    var feedUrlTemplate = "https://spreadsheets.google.com/feeds/cells/{key}/od6/public/basic?alt=json&callback=?";
     var feedUrl = feedUrlTemplate.replace("{key}", key);
         
     var deferred = new $.Deferred();
