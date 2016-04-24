@@ -1,33 +1,49 @@
 $(function(){
-   $("#checkIt").on("click", function(){
-       var word = $("#wordInput").val();
-       
-       if (word == currentWord) {
-           speak('Perfect');
-       }
-       else {
-           speak('Try again');
-       }
-   });
-   
-   $("#speakAgain").on("click", function(){
-        speak(currentWord);
-   });
-   
-   $("#showWord").on("click", function(){
-        $("#wordInput").val(currentWord);
-        speak(currentWord);
-   });
-   
-   $("#nextWord").on("click", function(){
-        currentWordIndex = getRandomInt(0, words.length);
-        currentWord = words[currentWordIndex];
+    $("#checkIt").on("click", function(){
+        var word = $("#wordInput").val();
         
-        $("#wordInput").val("");
-        speak(currentWord);
-   });
+        if (word.toLowerCase() == currentWord.toLowerCase()) {
+            speak('Perfect');
+        }
+        else {
+            speak('Try again');
+        }
+    });
+
+    $("#speakAgain").on("click", function(){
+         speak(currentWord); 
+    });
    
-    start();
+    $("#showWord").on("click", function(){
+         $("#wordInput").val(currentWord);
+         speak(currentWord);
+    });
+   
+    $("#nextWord").on("click", function(){
+         currentWordIndex = getRandomInt(0, words.length);
+         currentWord = words[currentWordIndex];
+         
+         $("#wordInput").val("");
+         speak(currentWord);
+    });
+    
+    $("#startPractice").on("click", function(){
+        if (words.length <= 0){
+            $("#message").html("Can't start the practice. Please load the  words first.");
+            
+            return;
+        }
+        
+        startPractice(currentWord);
+    });
+  
+    $("#loadDataFromGoogleWorksheet").on("click", function(){
+        var publishedUrl = $("#googleWorksheetUrl").val();
+        
+        loadWords(publishedUrl);
+    });
+   
+    init();
 });
 
 function speak(message) {
@@ -42,486 +58,105 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-speak('Let\s go');
+//speak('Let\s go');
 
 var words = [];
 var currentWordIndex;
 var currentWord;
 
 function init(){
-    Array.prototype.push.apply(words, getWords());
+    var publishedUrl = window.localStorage.getItem("googleWorksheetUrl");
     
-    currentWordIndex = getRandomInt(0, words.length);
-    currentWord = words[currentWordIndex]; 
+    console.log("words: " + publishedUrl);
+    
+    if (!publishedUrl){
+        $("#message").html("No words loaded. Enter Google Sheet Url.");
+        speak("No words loaded. Enter Google Sheet Url.");
+        
+        return;
+    }
+    
+    loadWords(publishedUrl);
+    startPractice();
 }
 
 function start(){
     init();
+}
 
-    speak(currentWord);    
+function startPractice(){
+        if (words.length <= 0){
+            $("#message").html("Can't start the practice. Please load the  words first.");
+            
+            return;
+        }
+
+        currentWordIndex = getRandomInt(0, words.length);
+        currentWord = words[currentWordIndex];
+
+        $("#wordInput").val("");
+        speak(currentWord);
+}
+
+function loadWords(publishedUrl){
+    loadWordsFromGoogleSheet(publishedUrl)
+        .done(function(wordsFromGoogleSheet) {
+            console.log(words);
+            words.length = 0;
+            Array.prototype.push.apply(words, wordsFromGoogleSheet);
+            console.log(words);
+            console.log(words.length + " words loaded. Ready for practice.");
+            $("#message").html(words.length + " words loaded. Ready for practice.");
+            
+            speak($("#message").html());
+            
+            window.localStorage.setItem("googleWorksheetUrl", publishedUrl);
+        })
+        .fail(function() {
+            console.log( "Could not load word." );
+            $("#message").html("Could not load word.");
+            deferred.fail();
+        })
+        .always(function() {
+            console.log( "complete" );
+        });
+}
+    
+function loadWordsFromGoogleSheet(publishedUrl){
+    console.log(publishedUrl);
+    var publishedUrlPrefix = "https://docs.google.com/spreadsheets/d/";
+    var publishedUrlPattern = "(https://docs.google.com/spreadsheets/d/)([^/]+)(/.+)";
+    var publishedUrlRegExp = new RegExp(publishedUrlPattern, "i")
+    var key = publishedUrl.replace(publishedUrlRegExp, "$2");
+    
+    if (!key){
+        console.log("Invalid Url");
+    }
+    
+    var feedUrlTemplate = "http://spreadsheets.google.com/feeds/cells/{key}/od6/public/basic?alt=json&callback=?";
+    var feedUrl = feedUrlTemplate.replace("{key}", key);
+        
+    var deferred = new $.Deferred();
+    
+    $.getJSON(feedUrl, function(data){
+        console.log(data);
+        var newWords = $.map(data.feed.entry, function(ele, i)
+        {
+            return ele.content["$t"];
+        });
+        
+        deferred.resolve(newWords);
+    });
+    
+    return deferred;
 }
 
 function getWords(){
     var wordList = [
-        'bat',
-        'sock',
-        'yam',
-        'peep',
-        'candy',
-        'pull',
-        'bark',
-        'melt',
-        'sky',
-        'lucky',
-        'smug',
-        'vote',
-        'truck',
-        'blob',
-        'tank',
-        'napkin',
-        'good',
-        'dress',
-        'store',
-        'apart',
-        'thing',
-        'all-star',
-        'five',
-        'jelly',
-        'tiger',
-        'fuzzy',
-        'trace',
-        'broom',
-        'frame',
-        'hidden',
-        'navy',
-        'glass',
-        'copycat',
-        'plus',
-        'down',
-        'goldfish',
-        'cheese',
-        'problem',
-        'cranny',
-        'grandma',
-        'patch',
-        'erase',
-        'tuba',
-        'curly',
-        'soup',
-        'towel',
-        'only',
-        'sailor',
-        'blue',
-        'which',
-        'rare',
-        'pamper',
-        'dojo',
-        'chair',
-        'forget',
-        'arch',
-        'bedrock',
-        'satin',
-        'dizzy',
-        'solo',
-        'passport',
-        'habits',
-        'cream',
-        'reg',
-        'ular',
-        'x-ray',
-        'teacher',
-        'splashy',
-        'Ping-Pong',
-        'attic',
-        'brunch',
-        'hallway',
-        'truth',
-        'quack',
-        'connect',
-        'newbie',
-        'husband',
-        'April',
-        'exam',
-        'reward',
-        'caramel',
-        'trademark',
-        'Velcro',
-        'atlas',
-        'motto',
-        'frothy',
-        'puddle',
-        'zilch',
-        'length',
-        'canopy',
-        'surefire',
-        'tractor',
-        'jersey',
-        'sofa',
-        'likable ',
-        'likeable',
-        'hinge',
-        'dozen',
-        'people',
-        'future',
-        'cough',
-        'balm',
-        'gusto',
-        'marlin',
-        'o\'clock',
-        'upshot',
-        'barter',
-        'hefty',
-        'glimmer',
-        'jackpot',
-        'warning',
-        'sonar',
-        'garlic',
-        'forum',
-        'plaza',
-        'silent',
-        'domino',
-        'naysayer',
-        'around',
-        'glance',
-        'curries',
-        'layover',
-        'splendid',
-        'random',
-        'zinger',
-        'Band-Aid',
-        'eyebrow',
-        'atomic',
-        'native',
-        'watchdog',
-        'dearly',
-        'clutch',
-        'polar',
-        'impostor ',
-        'imposter',
-        'tirade',
-        'field',
-        'postpone',
-        'ocean',
-        'parade',
-        'coward',
-        'error',
-        'owlishly',
-        'barrel',
-        'kiwi',
-        'beagle',
-        'acre',
-        'bawl',
-        'euro',
-        'tomorrow',
-        'wrinkle',
-        'crumb',
-        'dough',
-        'rattler',
-        'medley',
-        'difficult',
-        'flattery',
-        'drench',
-        'bonkers',
-        'seldom',
-        'mustang',
-        'fringe',
-        'calico',
-        'mutiny',
-        'blossom',
-        'magma',
-        'snippet',
-        'grumbling',
-        'mineral',
-        'scarlet',
-        'granola',
-        'umpire',
-        'Americana',
-        'nimble',
-        'trinket',
-        'shoehorn',
-        'aloha',
-        'pedigree',
-        'hubbub',
-        'several',
-        'galaxy',
-        'torrent',
-        'announcer',
-        'beverage',
-        'waist',
-        'valiant',
-        'thigh',
-        'everglades',
-        'summary',
-        'atrium',
-        'truce',
-        'masterpiece',
-        'emerald',
-        'nonfiction',
-        'platoon',
-        'junior',
-        'kangaroo',
-        'excuse',
-        'astronaut',
-        'lyrics',
-        'breadwinner',
-        'worrywart',
-        'cymbals',
-        'dispel',
-        'phrasing',
-        'coffee',
-        'dwindled',
-        'median',
-        'soprano',
-        'tropical',
-        'catalog ',
-        'catalogue',
-        'lactose',
-        'diploma',
-        'smidge',
-        'tarnish',
-        'fondant',
-        'cyberspace',
-        'prowess',
-        'measly',
-        'origin',
-        'trellis',
-        'autumn',
-        'variety',
-        'moxie',
-        'parable',
-        'chemistry',
-        'splurge',
-        'balderdash',
-        'hodgepodge',
-        'swollen',
-        'diagonal',
-        'superlative',
-        'macaw',
-        'Victorian',
-        'fulfilling',
-        'columnist',
-        'bewilder',
-        'hammock',
-        'squander',
-        'curfew',
-        'absurd',
-        'hoity-toity',
-        'whiff',
-        'nurture',
-        'vicinity',
-        'wharf',
-        'eerily',
-        'lavender',
-        'gauze',
-        'mirthful',
-        'beret',
-        'evaporation',
-        'vigorously',
-        'boycott',
-        'impulse',
-        'winsome',
-        'alternate',
-        'ottoman',
-        'entertain',
-        'anorak',
-        'documentary',
-        'jargon',
-        'gratis',
-        'sympathy',
-        'paragon',
-        'festooned',
-        'tonsils',
-        'mogul',
-        'udon',
-        'frequently',
-        'pomposity',
-        'marathon',
-        'polemic',
-        'casserole',
-        'platinum',
-        'mundane',
-        'alpaca',
-        'billiards',
-        'cyclone',
-        'Scrooge',
-        'genteel',
-        'collude',
-        'guardian',
-        'mosaic',
-        'personnel',
-        'tapioca',
-        'electrode',
-        'modular',
-        'quagmire',
-        'enunciate',
-        'melodramatic',
-        'epoxy',
-        'chortle',
-        'WYSIWYG',
-        'yurt',
-        'banquet',
-        'escarpment',
-        'zealous',
-        'decor',
-        'revelation',
-        'vague',
-        'cumulus',
-        'montage',
-        'query',
-        'maximum',
-        'territory',
-        'nationalism',
-        'latency',
-        'obscure',
-        'Gemini',
-        'fundamental',
-        'badger',
-        'alfresco',
-        'sustainable',
-        'tarmac',
-        'approximate',
-        'hypnotic',
-        'tranquil',
-        'synthetic',
-        'organelle',
-        'maverick',
-        'infrastructure',
-        'caftan',
-        'kaftan',
-        'resume',
-        'cylindrical',
-        'hubris',
-        'pathogen',
-        'carnitas',
-        'stagflation',
-        'esoteric',
-        'pinnacle',
-        'molasses',
-        'contentious',
-        'acoustic',
-        'supine',
-        'tenement',
-        'philharmonic',
-        'quid pro ',
-        'quo',
-        'iambic',
-        'legislature',
-        'spectacles',
-        'methodology',
-        'umbrage',
-        'diametrically',
-        'commandeer',
-        'proprietary',
-        'Celsius',
-        'migraine',
-        'cartouches',
-        'resilience',
-        'pancetta',
-        'braille',
-        'gibbous',
-        'germane',
-        'augment',
-        'serpentine',
-        'jurisdiction',
-        'languish',
-        'acetone',
-        'plaintiff',
-        'reciprocate',
-        'laceration',
-        'inclement',
-        'generosity',
-        'arboreal',
-        'ramifications',
-        'excursion',
-        'olfactory',
-        'adhesion',
-        'par excellence',
-        'shoji',
-        'ostensibly',
-        'appositive',
-        'soirée',
-        'effusive',
-        'impervious',
-        'Sanskrit',
-        'espadrille',
-        'patrician',
-        'estuary',
-        'frigate',
-        'commodious',
-        'machination',
-        'quasar',
-        'corollary',
-        'inimical',
-        'garrulous',
-        'tarantula',
-        'mazel tov ',
-        'mazal tov',
-        'esplanade',
-        'smorgasbord',
-        'mawkish',
-        'temerity',
-        'nascent',
-        'phoenix',
-        'buoyancy',
-        'melee',
-        'ciao',
-        'schnitzel',
-        'porcelain',
-        'evanescent',
-        'acquiesce',
-        'pharaoh',
-        'gossamer',
-        'deciduous',
-        'nanotechnology',
-        'basilica',
-        'solstice',
-        'conglomerate',
-        'turpitude',
-        'fungible',
-        'desertification',
-        'anemone',
-        'oubliette',
-        'sakura',
-        'xenophobic',
-        'gargantuan',
-        'corsair',
-        'idiosyncratic',
-        'vituperative',
-        'Orwellian',
-        'bossa nova',
-        'pachyderm',
-        'vainglorious',
-        'hegemony',
-        'echelon',
-        'larynx',
-        'concatenate',
-        'arpeggio',
-        'obelisk',
-        'sanctimonious',
-        'force majeure',
-        'tungsten',
-        'auriferous',
-        'pulchritude',
-        'de rigueur',
-        'nunchaku',
-        'guttural',
-        'interlocutor',
-        'joule',
-        'freesia',
-        'susurration',
-        'potpo',
-        'urri',
-        'leitmotif ',
-        'leitmotiv',
-        'Chihuahua',
-        'ecclesiastic',
-        'alcozen',
-        'insouciance',
-        'jai alai',
-        'desiccate',
-        'Iroquois',
-        'cheongsam',
-        'eleemosynary'
+        'please',
+        'load',
+        'more',
+        'words'
     ];
 
     return wordList;
