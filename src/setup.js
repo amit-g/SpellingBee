@@ -34,12 +34,14 @@ export class Setup {
   
   //@computedFrom('googleSheetUrl')
   get isGoogleSheetUrlValid() {
-    return this.googleSheetUrl.length > 0;
+      return true;
+    //return this.googleSheetUrl.length > 0;
   }
   
   //@computedFrom('googleSheetUrl')
   get isGistUrlValid() {
-    return this.gistUrl.length > 0;
+      return true;
+    //return this.gistUrl.length > 0;
   }
    
   submit() {
