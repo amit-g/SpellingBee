@@ -1,0 +1,61 @@
+<template>
+  <section class="au-animate">
+    <h2>${heading}</h2>
+    
+    <form role="form" submit.delegate="submit()" class="form-horizontal">
+        
+      <div class="form-group">
+        <label for="gSUrl" class="col-md-2 control-label"><!--Spelling--></label>
+        <div class="col-md-2">
+            <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling">
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+            <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check now</button>
+            <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-primary">Say it again</button>
+            <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-primary">I don't know</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-1">
+            <button type="button" click.delegate="getNextWord()" disabled.bind="!canPractice" class="btn btn-primary">Next</button>
+        </div>
+      </div>
+      
+      <div class="form-group" show.bind="showSpelling">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-${spellingClassName}">
+            <div class="panel-heading">${currentWord}</div>
+            <div class="panel-body">
+              Definition coming soon...
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </form>
+    
+    <div class="alert alert-warning col-md-6 col-md-offset-2" role="alert" show.bind="!canPractice">No words available to practice. Please click Setup and load words.</div>
+    
+  </section>
+  
+  <section>
+      <div show.bind="isSuccess" class="bg-success col-md-6 col-md-offset-3">
+            <p>${message}</p>
+      </div>
+      <div show.bind="isError" class="bg-danger col-md-6 col-md-offset-3">
+            <p>${errorMessage}</p>
+      </div>
+  </section>
+</template>
