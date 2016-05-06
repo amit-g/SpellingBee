@@ -17,9 +17,9 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-4">
-            <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check now</button>
-            <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-primary">Say it again</button>
-            <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-primary">I don't know</button>
+            <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check it</button>
+            <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-info">Say again</button>
+            <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
         </div>
       </div>
 
@@ -27,7 +27,7 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-1">
-            <button type="button" click.delegate="getNextWord()" disabled.bind="!canPractice" class="btn btn-primary">Next</button>
+            <button type="button" click.delegate="getNextWord()" disabled.bind="!canPractice" class="btn btn-success">Next</button>
         </div>
       </div>
       
@@ -38,7 +38,10 @@
           <div class="panel panel-${spellingClassName}">
             <div class="panel-heading">${currentWord}</div>
             <div class="panel-body">
-              Definition coming soon...
+              <div repeat.for="definition of definitions">
+                  <div>${definition}</div>
+                  <hr class="${ $last ? 'hidden' : '' }" />
+              </div>
             </div>
           </div>
         </div>
