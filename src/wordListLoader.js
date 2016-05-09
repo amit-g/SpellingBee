@@ -25,7 +25,8 @@ export class WordListLoader {
                     console.log("this.appState.wordMasterList=> " + this.appState.wordMasterList.length);
                     //console.log(this.appState.wordMasterList);
                     
-                    this.appState.updateWordList(words);
+                    //this.appState.updateWordList(words);
+                    this.appState.appendWords(words);
                     //this.appState.wordMasterList.length = 0;
                     //Array.prototype.push.apply(this.appState.wordMasterList, words);
                     

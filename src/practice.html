@@ -2,55 +2,60 @@
   <section class="au-animate">
     <h2>${heading}</h2>
     
-    <form role="form" submit.delegate="submit()" class="form-horizontal">
+    <div class="well">
+      <form role="form" submit.delegate="submit()" class="form-horizontal">
+          
+        <div class="form-group">
+          <label for="gSUrl" class="col-md-2 control-label"><!--Spelling--></label>
+          <div class="col-md-2">
+              <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling">
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
         
-      <div class="form-group">
-        <label for="gSUrl" class="col-md-2 control-label"><!--Spelling--></label>
-        <div class="col-md-2">
-            <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling">
+        <div class="form-group row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-4">
+              <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check it</button>
+              <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-info">Say again</button>
+              <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
+          </div>
         </div>
-        <div class="col-md-6">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-4">
-            <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check it</button>
-            <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-info">Say again</button>
-            <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
-        </div>
-      </div>
 
-      <div class="form-group">
-        <div class="col-md-2">
+        <div class="form-group row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-1">
+              <button type="button" click.delegate="getNextWord()" disabled.bind="!canPractice" class="btn btn-success">Next</button>
+          </div>
         </div>
-        <div class="col-md-1">
-            <button type="button" click.delegate="getNextWord()" disabled.bind="!canPractice" class="btn btn-success">Next</button>
-        </div>
-      </div>
-      
-      <div class="form-group" show.bind="showSpelling">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-6">
-          <div class="panel panel-${spellingClassName}">
-            <div class="panel-heading">${currentWord}</div>
-            <div class="panel-body">
-              <div repeat.for="definition of definitions">
-                  <div>${definition}</div>
-                  <hr class="${ $last ? 'hidden' : '' }" />
+        
+        <div class="form-group row" show.bind="showSpelling">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-${spellingClassName}">
+              <div class="panel-heading">${currentWord}</div>
+              <div class="panel-body">
+                <div repeat.for="definition of definitions">
+                    <div>${definition}</div>
+                    <hr class="${ $last ? 'hidden' : '' }" />
+                </div>
               </div>
             </div>
           </div>
         </div>
+        
+      </form>
+      
+      <div class="row">
+        <div class="alert alert-warning col-md-6 col-md-offset-2" role="alert" show.bind="!canPractice">No words available to practice. Please click Setup and load words.</div>
+        <div class="alert alert-info col-md-6 col-md-offset-2" role="alert" show.bind="canPractice">${wordCount} words available to practice.</div>
       </div>
       
-    </form>
-    
-    <div class="alert alert-warning col-md-6 col-md-offset-2" role="alert" show.bind="!canPractice">No words available to practice. Please click Setup and load words.</div>
-    
+    </div>
   </section>
   
   <section>

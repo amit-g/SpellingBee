@@ -37,6 +37,10 @@ export class Practice {
     return this.appState.wordMasterList.length > 0;
   }
   
+  get wordCount() {
+    return this.appState.wordMasterList.length;
+  }
+  
   get isSpellingValid() {
       return this.spelling.length > 0;
   }

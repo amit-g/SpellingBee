@@ -4,7 +4,7 @@ import {TextToSpeech} from 'textToSpeech';
 
 @inject(AppState, TextToSpeech, 'window')
 export class SetupVoiceCustomElement {
-  heading = 'SetupVoice';
+  heading = 'Setup Voice';
 
   constructor(appState, textToSpeech, window) {
     this.appState = appState;

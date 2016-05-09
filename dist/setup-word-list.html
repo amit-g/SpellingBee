@@ -7,27 +7,24 @@
     </div>
     
     <div class="panel-body">
+      
       <div class="form-group">
-        <label for="gSUrl" class="col-md-2 control-label">Google Sheet Url</label>
-        <div class="col-md-8">
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon3">https://docs.google.com/</span>
-              <input type="text" value.bind="googleSheetUrl" class="form-control" id="gsu" placeholder="Google sheet url">
-            </div>
+        <label for="gSUrl" class="control-label">Google Sheet Url</label>
+        <div class="input-group">
+          <span class="input-group-addon">Url</span>
+          <input type="text" value.bind="googleSheetUrl" class="form-control" id="gsu" placeholder="Google sheet url">
         </div>
-        <div class="col-md-2">
-            <button type="button" click.delegate="loadWordsFromGoogleSheet()" disabled.bind="!isGoogleSheetUrlValid" class="btn btn-primary col-md-12">Load from Google Sheet</button>
-        </div>
+        <button type="button" click.delegate="loadWordsFromGoogleSheet()" disabled.bind="!isGoogleSheetUrlValid" class="form-control btn btn-primary">Load from Google Sheet</button>
       </div>
       
       <div class="form-group">
-        <label for="gu" class="col-md-2 control-label">Gist Url</label>
-        <div class="col-md-8">
-            <input type="text" value.bind="gistUrl" class="form-control" id="gu" placeholder="Gist Url">
+        <label for="gu" class="control-label">Gist Url</label>
+        
+        <div class="input-group">
+          <span class="input-group-addon">Url</span>
+          <input type="text" value.bind="gistUrl" class="form-control" id="gu" placeholder="Gist Url">
         </div>
-        <div class="col-md-2">
-            <button type="button" click.delegate="loadWordsFromGist()" disabled.bind="!isGistUrlValid" class="btn btn-primary col-md-12">Load from Gist</button>
-        </div>
+        <button type="button" click.delegate="loadWordsFromGist()" disabled.bind="!isGistUrlValid" class="form-control btn btn-primary">Load from Gist</button>
       </div>
       
       <messages view-model.ref="messages"></messages> 

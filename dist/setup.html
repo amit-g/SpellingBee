@@ -1,31 +1,34 @@
 <template>
   <require from="./setup-word-list"></require>
   <require from="./setup-voice"></require>
+  <require from="./setup-advanced"></require>
   
   <section class="au-animate">
     <h2>${heading}</h2>
-
-    <form role="form" submit.delegate="submit()" class="form-horizontal">
-  
-      <div class="form-group">
-        <label class="col-md-2 control-label">Word List Sources</label>
-        <div class="col-md-8">
-            <setup-word-list></setup-word-list>
+    
+    <div class="well">
+      <form submit.delegate="submit()" class="form" role="form">
+    
+        <div class="form-group row">
+          <div class="col-md-10 col-md-offset-1">
+              <setup-word-list></setup-word-list>
+          </div>
         </div>
-        <div class="col-md-2">
+        
+        <div class="form-group row">
+          <div class="col-md-10 col-md-offset-1">
+              <setup-voice></setup-voice>
+          </div>
         </div>
-      </div>
-      
-      <div class="form-group">
-        <label class="col-md-2 control-label">Voices</label>
-        <div class="col-md-8">
-            <setup-voice></setup-voice>
+        
+        <div class="form-group row">
+          <div class="col-md-10 col-md-offset-1">
+              <setup-advanced></setup-advanced>
+          </div>
         </div>
-        <div class="col-md-2">
-        </div>
-      </div>
-      
-    </form>
+        
+      </form>
+    </div>
     
   </section>
   

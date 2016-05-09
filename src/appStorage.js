@@ -16,6 +16,10 @@ export class AppStorage {
             leaderBoard: "LeaderBoard"
         }
     }
+    
+    clear() {
+        this.localStorage.clear();
+    }
  
     get voiceName() {
         return this.getObject(AppStorage.storageKeys.voiceName, "");
