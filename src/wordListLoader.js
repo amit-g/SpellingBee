@@ -20,16 +20,17 @@ export class WordListLoader {
                 .then(promiseData => {
                     var words = promiseData.data;
                     
-                    console.log("words=>");
-                    console.log(words);
-                    console.log("this.appState.wordMasterList=>");
-                    console.log(this.appState.wordMasterList);
+                    console.log("words=> " + words.length);
+                    //console.log(words);
+                    console.log("this.appState.wordMasterList=> " + this.appState.wordMasterList.length);
+                    //console.log(this.appState.wordMasterList);
                     
-                    this.appState.wordMasterList.length = 0;
-                    Array.prototype.push.apply(this.appState.wordMasterList, words);
+                    this.appState.updateWordList(words);
+                    //this.appState.wordMasterList.length = 0;
+                    //Array.prototype.push.apply(this.appState.wordMasterList, words);
                     
-                    console.log("this.appState.wordMasterList=>");
-                    console.log(this.appState.wordMasterList);
+                    console.log("this.appState.wordMasterList=> " + this.appState.wordMasterList.length);
+                    //console.log(this.appState.wordMasterList);
                     
                     promiseData.data = null;
                     

@@ -1,9 +1,13 @@
+import 'jquery';
 import 'bootstrap';
+import 'lodash';
 
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging();
+    
+  configureContainer(aurelia.container);
 
   //Uncomment the line below to enable animation.
   //aurelia.use.plugin('aurelia-animator-css');
@@ -13,4 +17,12 @@ export function configure(aurelia) {
   //aurelia.use.plugin('aurelia-html-import-template-loader')
 
   aurelia.start().then(() => aurelia.setRoot());
+}
+
+function configureContainer(container) {
+  container.registerInstance('window', window);
+  container.registerInstance('document', document);
+  container.registerInstance('localStorage', window.localStorage);
+  container.registerInstance('jQuery', $);
+  container.registerInstance('loDash', _);
 }

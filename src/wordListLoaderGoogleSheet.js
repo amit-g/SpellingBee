@@ -1,13 +1,11 @@
 import {inject} from 'aurelia-framework';
-//import {HttpClient} from 'aurelia-fetch-client';
-//import 'fetch';
 import {HttpClient} from 'aurelia-http-client';
-//import 'http';
 
-@inject(HttpClient)
+@inject(HttpClient, 'jQuery')
 export class WordListLoaderGoogleSheet {
-    constructor (http) {
+    constructor (http, $) {
         this.http = http;
+        this.$ = $;
     }
     
     load(publishedUrl) {
@@ -49,11 +47,12 @@ export class WordListLoaderGoogleSheet {
                 .then(httpResponse => {
                         console.log(httpResponse);
                         
-                        var words = $.map(httpResponse.response.feed.entry, function (ele, i) {
+                        var words = this.$.map(httpResponse.response.feed.entry, function (ele, i) {
                             return ele.content["$t"];
                         });
 
-                        console.log(words);
+                        console.log("words=> " + words.length);
+                        //console.log(words);
                         
                         promiseData.isSuccess = true;
                         promiseData.data = words;
