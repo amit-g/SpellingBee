@@ -19,6 +19,8 @@ export class SetupVoiceCustomElement {
   playVoice(index) {
       let message = this.sampleText;
       this.textToSpeech.speak(message, this.voices[index]);
+      message = "I am using " + this.voices[index].name + " voice";
+      this.textToSpeech.speak(message, this.voices[index]);
   }
 
   setVoice(index) {

@@ -32,9 +32,8 @@ export class Practice {
     return false;
   }
   
-  //@computedFrom('appState.wordMasterList')
   get canPractice() {
-    return this.appState.wordMasterList.length > 0;
+    return this.appState.wordMasterList && this.appState.wordMasterList.length > 0;
   }
   
   get wordCount() {
