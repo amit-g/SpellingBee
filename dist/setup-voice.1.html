@@ -1,0 +1,29 @@
+<template>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Voices</h3>
+    </div>
+    
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="st" class="col-md-2 control-label">Sample Text</label>
+        <div class="col-md-10">
+          <input type="text" value.bind="sampleText" class="form-control" id="st" placeholder="Sample text to speak">
+        </div>
+      </div>
+ 
+      <ul class="list-group">
+        <li class="list-group-item clearfix ${voice.name} ${currentVoiceName} ${ (voice.name === currentVoiceName) ? 'active' : ''}" repeat.for="voice of voices">
+          <p class="list-group-item-text">
+            <span class="badge">${$index + 1}</span> ${voice.name}
+            <span class="pull-right">
+              <button class="btn btn-md btn-info" click.delegate="playVoice($index)">Play</button>
+              <button class="btn btn-md btn-success" click.delegate="setVoice($index)">Set</button>
+            </span>
+          </p>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+</template>

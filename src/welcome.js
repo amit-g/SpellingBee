@@ -3,7 +3,7 @@ import {TextToSpeech} from 'textToSpeech';
 
 @inject(TextToSpeech)
 export class Welcome {
-  heading = 'Welcome to Spelling Bee Practice...';
+  heading = 'Welcome to Spelling Bee Practice';
 
   constructor(textToSpeech) {
     this.textToSpeech = textToSpeech;
@@ -15,7 +15,7 @@ export class Welcome {
 
   activate() {
     if (this.isSupported){
-        this.textToSpeech.speak("Welcome to spelling bee practice.");
+        this.textToSpeech.speak("Welcome to spelling bee practice");
     }
   }
 }

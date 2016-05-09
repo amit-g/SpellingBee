@@ -1,38 +1,27 @@
 <template>
+  <require from="./setup-word-list"></require>
   <require from="./setup-voice"></require>
   
   <section class="au-animate">
     <h2>${heading}</h2>
-    
+
     <form role="form" submit.delegate="submit()" class="form-horizontal">
-        
+  
       <div class="form-group">
-        <label for="gSUrl" class="col-md-2 control-label">Google Sheet Url</label>
+        <label class="col-md-2 control-label">Word List Sources</label>
         <div class="col-md-8">
-            <input type="text" value.bind="googleSheetUrl" class="form-control" id="gsu" placeholder="Google sheet url">
+            <setup-word-list></setup-word-list>
         </div>
         <div class="col-md-2">
-            <button type="button" click.delegate="loadWordsFromGoogleSheet()" disabled.bind="!isGoogleSheetUrlValid" class="btn btn-primary col-md-12">Load Words from Google Sheet</button>
         </div>
       </div>
       
       <div class="form-group">
-        <label for="gu" class="col-md-2 control-label">Gist Url</label>
-        <div class="col-md-8">
-            <input type="text" value.bind="gistUrl" class="form-control" id="gu" placeholder="Gist Url">
-        </div>
-        <div class="col-md-2">
-            <button type="button" click.delegate="loadWordsFromGist()" disabled.bind="!isGistUrlValid" class="btn btn-primary col-md-12">Load Words from Gist</button>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="gu" class="col-md-2 control-label">Voices</label>
+        <label class="col-md-2 control-label">Voices</label>
         <div class="col-md-8">
             <setup-voice></setup-voice>
         </div>
         <div class="col-md-2">
-            
         </div>
       </div>
       

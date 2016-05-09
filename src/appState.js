@@ -7,6 +7,7 @@ export class AppState {
         this._ = _;
         this.appStorage = appStorage;
         
+        this.googleSheetUrl = this.appStorage.googleSheetUrl || '';
         this.voiceName = this.appStorage.voiceName || 'native';
         this.wordMasterList = this.appStorage.wordMasterList || [];
         this.leaderBoard = this.appStorage.leaderBoard || [];

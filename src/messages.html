@@ -1,0 +1,10 @@
+<template>
+    <section>
+      <div show.bind="isSuccess" class="alert alert-success col-md-8 col-md-offset-2" role="alert">
+            <p>${message}</p>
+      </div>
+      <div show.bind="isError" class="alert alert-danger col-md-8 col-md-offset-2" role="alert">
+            <p>${errorMessage}</p>
+      </div>
+    </section>
+</template>

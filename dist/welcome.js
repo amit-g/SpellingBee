@@ -38,14 +38,14 @@ System.register(['aurelia-framework', 'textToSpeech'], function (_export, _conte
         function Welcome(textToSpeech) {
           _classCallCheck(this, Welcome);
 
-          this.heading = 'Welcome to Spelling Bee Practice...';
+          this.heading = 'Welcome to Spelling Bee Practice';
 
           this.textToSpeech = textToSpeech;
         }
 
         Welcome.prototype.activate = function activate() {
           if (this.isSupported) {
-            this.textToSpeech.speak("Welcome to spelling bee practice.");
+            this.textToSpeech.speak("Welcome to spelling bee practice");
           }
         };
 
@@ -77,4 +77,4 @@ System.register(['aurelia-framework', 'textToSpeech'], function (_export, _conte
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlbGNvbWUuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7OztBQUFRLFkscUJBQUEsTTs7QUFDQSxrQixpQkFBQSxZOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7eUJBR0ssTyxXQURaLE9BQU8sWUFBUCxDO0FBSUMseUJBQVksWUFBWixFQUEwQjtBQUFBOztBQUFBLGVBRjFCLE9BRTBCLEdBRmhCLHFDQUVnQjs7QUFDeEIsZUFBSyxZQUFMLEdBQW9CLFlBQXBCO0FBQ0Q7OzBCQU1ELFEsdUJBQVc7QUFDVCxjQUFJLEtBQUssV0FBVCxFQUFxQjtBQUNqQixpQkFBSyxZQUFMLENBQWtCLEtBQWxCLENBQXdCLG1DQUF4QjtBQUNIO0FBQ0YsUzs7Ozs4QkFSaUI7QUFDaEIsbUJBQU8sS0FBSyxZQUFMLENBQWtCLFdBQXpCO0FBQ0Q7Ozs7Ozs7O3FDQVNVLG1COzs7OztzQ0FDWCxNLG1CQUFPLEssRUFBTztBQUNaLGlCQUFPLFNBQVMsTUFBTSxXQUFOLEVBQWhCO0FBQ0QsUyIsImZpbGUiOiJ3ZWxjb21lLmpzIiwic291cmNlUm9vdCI6Ii9zcmMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlbGNvbWUuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7OztBQUFRLFkscUJBQUEsTTs7QUFDQSxrQixpQkFBQSxZOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7eUJBR0ssTyxXQURaLE9BQU8sWUFBUCxDO0FBSUMseUJBQVksWUFBWixFQUEwQjtBQUFBOztBQUFBLGVBRjFCLE9BRTBCLEdBRmhCLGtDQUVnQjs7QUFDeEIsZUFBSyxZQUFMLEdBQW9CLFlBQXBCO0FBQ0Q7OzBCQU1ELFEsdUJBQVc7QUFDVCxjQUFJLEtBQUssV0FBVCxFQUFxQjtBQUNqQixpQkFBSyxZQUFMLENBQWtCLEtBQWxCLENBQXdCLGtDQUF4QjtBQUNIO0FBQ0YsUzs7Ozs4QkFSaUI7QUFDaEIsbUJBQU8sS0FBSyxZQUFMLENBQWtCLFdBQXpCO0FBQ0Q7Ozs7Ozs7O3FDQVNVLG1COzs7OztzQ0FDWCxNLG1CQUFPLEssRUFBTztBQUNaLGlCQUFPLFNBQVMsTUFBTSxXQUFOLEVBQWhCO0FBQ0QsUyIsImZpbGUiOiJ3ZWxjb21lLmpzIiwic291cmNlUm9vdCI6Ii9zcmMifQ==

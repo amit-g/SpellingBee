@@ -35,7 +35,7 @@ export class WordListLoaderGoogleSheet {
             if (!key || key === publishedUrl) {
                 console.log("Invalid Url: " + publishedUrl);
                 
-                promiseData.errorMessage = 'Invalid Google Sheet Url. Please enter a valid url.';
+                promiseData.errorMessage = 'Invalid Google Sheet Url. The Google Sheet url starts with https://docs.google.com/... and ends in /edit#...';
 
                 reject(promiseData);
             }
