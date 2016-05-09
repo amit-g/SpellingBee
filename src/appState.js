@@ -6,12 +6,18 @@ export class AppState {
     constructor (_, appStorage) {
         this._ = _;
         this.appStorage = appStorage;
-
+        
+        this.voiceName = this.appStorage.voiceName || 'native';
         this.wordMasterList = this.appStorage.wordMasterList || [];
         this.leaderBoard = this.appStorage.leaderBoard || [];
-        
-        console.log(localStorage);        
-        console.log(this.appStorage.wordMasterList);        
+    }
+    
+    get voiceName() {
+        return this.appStorage.voiceName;
+    }
+    
+    set voiceName(value) {
+        this.appStorage.voiceName = value;
     }
     
     updateWordList(words) {

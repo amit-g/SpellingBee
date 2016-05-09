@@ -118,7 +118,6 @@ export class Practice {
 
   activate() {
       if (!this.canPractice){
-          this.textToSpeech.speak("Welcome to spelling bee practice.");
           this.textToSpeech.speak("No words available. Please click Setup and load words.")
       }
       else {

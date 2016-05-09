@@ -4,16 +4,27 @@ import {inject} from 'aurelia-framework';
 export class AppStorage {
     constructor(localStorage) {
         this.localStorage = localStorage;
+        
+        console.log(this.localStorage);
     }
     
     static get storageKeys() {
         return {
+            voiceName: "VoiceName",
             googleSheetUrl: "GoogleSheetUrl",
-            wordMasterList: "wordMasterList",
-            leaderBoard: "leaderBoard"
+            wordMasterList: "WordMasterList",
+            leaderBoard: "LeaderBoard"
         }
     }
-  
+ 
+    get voiceName() {
+        return this.getObject(AppStorage.storageKeys.voiceName, "");
+    }
+    
+    set voiceName(value) {
+        return this.setObject(AppStorage.storageKeys.voiceName, value);
+    }
+     
     get googleSheetUrl() {
         return this.getObject(AppStorage.storageKeys.googleSheetUrl, "");
     }
