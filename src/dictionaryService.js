@@ -5,6 +5,9 @@ import {HttpClient} from 'aurelia-http-client';
 export class DictionaryService {
     constructor (http) {
         this.http = http;
+        
+        //this.dictServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
+        this.dictServiceBaseUrl = "";
     }
     
     define(word) {
@@ -24,7 +27,7 @@ export class DictionaryService {
                 reject(promiseData);
             }
             
-            var dictServiceUrl = "DictService/Define?word=" + word;
+            var dictServiceUrl = this.dictServiceBaseUrl + "DictService/Define?word=" + word;
 
             console.log(dictServiceUrl);
 
