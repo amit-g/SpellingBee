@@ -27,10 +27,18 @@
                 <div class="col-md-4">
                     <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check it</button>
                     <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-info">Say again</button>
+                    <button type="button" click.delegate="speakDefinition()" disabled.bind="!canPractice" class="btn btn-info">Definition</button>
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
                     <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
                 </div>
               </div>
-
+              
               <div class="form-group row">
                 <div class="col-md-2">
                 </div>
@@ -47,7 +55,9 @@
                     <div class="panel-heading">${currentWord}</div>
                     <div class="panel-body">
                       <div repeat.for="definition of definitions">
-                          <div>${definition}</div>
+                          <div>${definition.displayText}</div>
+                          <br/>
+                          <div class="pull-right small text-muted">${definition.attributionText}</div>
                           <hr class="${ $last ? 'hidden' : '' }" />
                       </div>
                     </div>

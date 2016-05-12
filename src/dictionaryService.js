@@ -6,8 +6,8 @@ export class DictionaryService {
     constructor (http) {
         this.http = http;
         
-        //this.dictServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
-        this.dictServiceBaseUrl = "";
+        this.dictServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
+        //this.dictServiceBaseUrl = "";
     }
     
     define(word) {
@@ -33,20 +33,30 @@ export class DictionaryService {
 
             this.http.get(dictServiceUrl)
                 .then(httpResponse => {
-                        console.log(httpResponse);
+                        //console.log(httpResponse);
                         
                         var xmlResponse = $.parseXML(httpResponse.response);
                         var $xmlResponse = $(xmlResponse);
                         var definitions = [];
                         
-                        $xmlResponse.find("WordDefinition").each(function(i, e){
-                            definitions.push($(this).text());
+                        $xmlResponse.find("Definition").each(function(i, e) {
+                            var text = $(this).find("WordDefinition").first().text();
+                            var dictionaryID = $(this).find("Dictionary Id").first().text();
+                            var dictionaryName = $(this).find("Dictionary Name").first().text();
+                            
+                            var definition = {
+                                    "text": text,
+                                    "sourceDictionary": dictionaryName,
+                                    "attributionText": "from " + dictionaryName
+                            };
+                            
+                            definitions.push(definition);
                         });
 
-                        console.log(definitions);
+                        //console.log(definitions);
                         
                         definitions.sort(function(a, b){
-                           return a.length < b.length ? -1 : 1; 
+                           return a.text.length < b.text.length ? -1 : 1; 
                         });
                         
                         promiseData.isSuccess = true;

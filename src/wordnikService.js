@@ -2,9 +2,12 @@ import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 
 @inject(HttpClient)
-export class DictionaryService {
+export class WordnikService {
     constructor (http) {
         this.http = http;
+        
+        this.wordnikServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
+        //this.wordnikServiceBaseUrl = "";
     }
     
     define(word) {
@@ -24,26 +27,18 @@ export class DictionaryService {
                 reject(promiseData);
             }
             
-            var dictServiceUrl = "DictService/Define?word=" + word;
+            var wordnikServiceUrl = this.wordnikServiceBaseUrl + "wordnikService/v4/word.json/" + word + "/definitions";
 
-            console.log(dictServiceUrl);
+            console.log(wordnikServiceUrl);
 
-            this.http.get(dictServiceUrl)
+            this.http.get(wordnikServiceUrl)
                 .then(httpResponse => {
-                        console.log(httpResponse);
+                        //console.log(httpResponse);
                         
-                        var xmlResponse = $.parseXML(httpResponse.response);
-                        var $xmlResponse = $(xmlResponse);
-                        var definitions = [];
-                        
-                        $xmlResponse.find("WordDefinition").each(function(i, e){
-                            definitions.push($(this).text());
-                        });
-
-                        console.log(definitions);
+                        var definitions = httpResponse.content;
                         
                         definitions.sort(function(a, b){
-                           return a.length < b.length ? -1 : 1; 
+                           return a.text.length < b.text.length ? -1 : 1; 
                         });
                         
                         promiseData.isSuccess = true;

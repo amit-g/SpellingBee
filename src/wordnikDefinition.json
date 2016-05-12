@@ -1,0 +1,233 @@
+{
+"schema": [
+  {
+    "extendedText": "string",
+    "text": "string",
+    "sourceDictionary": "string",
+    "citations": [
+      {
+        "cite": "string",
+        "source": "string"
+      }
+    ],
+    "labels": [
+      {
+        "text": "string",
+        "type": "string"
+      }
+    ],
+    "score": "float",
+    "exampleUses": [
+      {
+        "text": "string"
+      }
+    ],
+    "attributionUrl": "string",
+    "seqString": "string",
+    "attributionText": "string",
+    "relatedWords": [
+      {
+        "label1": "string",
+        "relationshipType": "string",
+        "label2": "string",
+        "label3": "string",
+        "words": [
+          "string"
+        ],
+        "gram": "string",
+        "label4": "string"
+      }
+    ],
+    "sequence": "string",
+    "word": "string",
+    "notes": [
+      {
+        "noteType": "string",
+        "appliesTo": [
+          "string"
+        ],
+        "value": "string",
+        "pos": "int"
+      }
+    ],
+    "textProns": [
+      {
+        "raw": "string",
+        "seq": "int",
+        "rawType": "string"
+      }
+    ],
+    "partOfSpeech": "string"
+  }
+],
+"sampleData": [
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "0",
+    "text": "Materials, such as letters and packages, handled in a postal system.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "1",
+    "text": "Postal material for a specific person or organization.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "2",
+    "text": "Material processed for distribution from a post office at a specified time:  the morning mail. ",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "3",
+    "text": "A system by which letters, packages, and other postal materials are transported. Used in the plural with the.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "4",
+    "text": "A vehicle by which mail is transported.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "5",
+    "text": "Mail or messages sent electronically; e-mail.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "verb-transitive",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "6",
+    "text": "To send by mail.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "verb-intransitive",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "7",
+    "text": "To send letters and other postal material by mail.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "8",
+    "text": "Flexible armor composed of small overlapping metal rings, loops of chain, or scales.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "9",
+    "text": "The protective covering of certain animals, as the shell of a turtle.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "verb-transitive",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "10",
+    "text": "To cover or armor with mail.",
+    "score": 0
+  },
+  {
+    "textProns": [],
+    "sourceDictionary": "ahd-legacy",
+    "exampleUses": [],
+    "relatedWords": [],
+    "labels": [],
+    "citations": [],
+    "word": "mail",
+    "partOfSpeech": "noun",
+    "attributionText": "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "sequence": "11",
+    "text": "Scots   Rent, payment, or tribute.",
+    "score": 0
+  }
+]
+}

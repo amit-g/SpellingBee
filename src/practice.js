@@ -2,17 +2,21 @@ import {inject} from 'aurelia-framework';
 import {AppState} from 'appState';
 import {RandomHelper} from 'randomHelper';
 import {TextToSpeech} from 'textToSpeech';
+import {WordDefinition} from 'wordDefinition';
 import {DictionaryService} from 'dictionaryService';
+import {WordnikService} from 'wordnikService';
 
-@inject(AppState, RandomHelper, TextToSpeech, DictionaryService)
+@inject('loDash', AppState, RandomHelper, TextToSpeech, DictionaryService, WordnikService)
 export class Practice {
   heading = 'Practice';
 
-  constructor(appState, randomHelper, textToSpeech, dictionaryService) {
+  constructor(_, appState, randomHelper, textToSpeech, dictionaryService, wordnikService) {
+    this._ = _;
     this.appState = appState;
     this.randomHelper = randomHelper;
     this.textToSpeech = textToSpeech;
     this.dictionaryService = dictionaryService;
+    this.wordnikService = wordnikService;
     
     this.spelling = "";
     this.showSpelling = false;
@@ -20,6 +24,7 @@ export class Practice {
     this.currentWord = "";
     
     this.definitions = [];
+    this.definitionIndex = -1;
     
     this.isSuccess = false;
     this.isError = false;
@@ -67,6 +72,27 @@ export class Practice {
     this.textToSpeech.speak(this.currentWord);
   }
   
+  speakDefinition() {
+    this.populateDefinitions()
+        .then(promiseData => {
+          if (this.definitionIndex >= 0 && this.definitionIndex < this.definitions.length) {
+            var definition = this.definitions[this.definitionIndex];
+            
+            if (definition.partOfSpeech) {
+              this.textToSpeech.speak(definition.partOfSpeech);
+            }
+
+            this.textToSpeech.speak(definition.text);
+            
+            this.definitionIndex++;
+            
+            if (this.definitionIndex >= this.definitions.length) {
+              this.definitionIndex = 0;
+            }
+          }          
+        });
+  }
+  
   displaySpelling() {
     this.showSpelling = true;
     this.showDefinitions();
@@ -77,6 +103,7 @@ export class Practice {
     this.spelling = "";
     this.showSpelling = false;
     this.definitions.length = 0;
+    this.definitionIndex = -1;
     this.currentWordIndex = this.randomHelper.getRandomInt(0, this.appState.wordMasterList.length);
     this.currentWord = this.appState.wordMasterList[this.currentWordIndex];
 
@@ -101,22 +128,33 @@ export class Practice {
   }
   
   showDefinitions(){
-    if (this.definitions.length == 0){
-      this.populateDefinitions();
-    } 
+    this.populateDefinitions();
   }
   
   populateDefinitions(){
-    this.definitions.length = 0;
-    this.dictionaryService.define(this.currentWord)
-      .then(promiseData => {
-          console.log(promiseData);
-          Array.prototype.push.apply(this.definitions, promiseData.data);
-      })
-      .catch(promiseData => {
-          console.log(promiseData);
-          this.setErrorMessage(promiseData.errorMessage);
-      });
+    var promise = Promise.resolve();
+    
+    if (this.definitions.length == 0) {
+      promise = this.wordnikService.define(this.currentWord)
+        .then(promiseData => {
+            //console.log(promiseData);
+            this.definitions.length = 0;
+            this.definitionIndex = 0;
+
+            //Array.prototype.push.apply(this.definitions, promiseData.data);
+            this.definitions = this._.map(promiseData.data, function(d) {
+                return new WordDefinition(d);                
+            });
+        })
+        .catch(promiseData => {
+            console.log(promiseData);
+            this.definitions.length = 0;
+            this.definitionIndex = -1;
+            this.setErrorMessage(promiseData.errorMessage);
+        });
+    }
+      
+    return promise;    
   }
 
   activate() {

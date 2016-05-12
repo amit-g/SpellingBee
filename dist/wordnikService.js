@@ -1,7 +1,7 @@
 'use strict';
 
 System.register(['aurelia-framework', 'aurelia-http-client'], function (_export, _context) {
-    var inject, HttpClient, _dec, _class, DictionaryService;
+    var inject, HttpClient, _dec, _class, WordnikService;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -16,14 +16,16 @@ System.register(['aurelia-framework', 'aurelia-http-client'], function (_export,
             HttpClient = _aureliaHttpClient.HttpClient;
         }],
         execute: function () {
-            _export('DictionaryService', DictionaryService = (_dec = inject(HttpClient), _dec(_class = function () {
-                function DictionaryService(http) {
-                    _classCallCheck(this, DictionaryService);
+            _export('WordnikService', WordnikService = (_dec = inject(HttpClient), _dec(_class = function () {
+                function WordnikService(http) {
+                    _classCallCheck(this, WordnikService);
 
                     this.http = http;
+
+                    this.wordnikServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
                 }
 
-                DictionaryService.prototype.define = function define(word) {
+                WordnikService.prototype.define = function define(word) {
                     var _this = this;
 
                     console.log("word: " + word);
@@ -42,25 +44,16 @@ System.register(['aurelia-framework', 'aurelia-http-client'], function (_export,
                             reject(promiseData);
                         }
 
-                        var dictServiceUrl = "DictService/Define?word=" + word;
+                        var wordnikServiceUrl = _this.wordnikServiceBaseUrl + "wordnikService/v4/word.json/" + word + "/definitions";
 
-                        console.log(dictServiceUrl);
+                        console.log(wordnikServiceUrl);
 
-                        _this.http.get(dictServiceUrl).then(function (httpResponse) {
-                            console.log(httpResponse);
+                        _this.http.get(wordnikServiceUrl).then(function (httpResponse) {
 
-                            var xmlResponse = $.parseXML(httpResponse.response);
-                            var $xmlResponse = $(xmlResponse);
-                            var definitions = [];
-
-                            $xmlResponse.find("WordDefinition").each(function (i, e) {
-                                definitions.push($(this).text());
-                            });
-
-                            console.log(definitions);
+                            var definitions = httpResponse.content;
 
                             definitions.sort(function (a, b) {
-                                return a.length < b.length ? -1 : 1;
+                                return a.text.length < b.text.length ? -1 : 1;
                             });
 
                             promiseData.isSuccess = true;
@@ -79,11 +72,11 @@ System.register(['aurelia-framework', 'aurelia-http-client'], function (_export,
                     return promise;
                 };
 
-                return DictionaryService;
+                return WordnikService;
             }()) || _class));
 
-            _export('DictionaryService', DictionaryService);
+            _export('WordnikService', WordnikService);
         }
     };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndvcmRuaWtTZXJ2aWNlLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7QUFBUSxrQixxQkFBQSxNOztBQUNBLHNCLHNCQUFBLFU7Ozt5Q0FHSyxpQixXQURaLE9BQU8sVUFBUCxDO0FBRUcsMkNBQWEsSUFBYixFQUFtQjtBQUFBOztBQUNmLHlCQUFLLElBQUwsR0FBWSxJQUFaO0FBQ0g7OzRDQUVELE0sbUJBQU8sSSxFQUFNO0FBQUE7O0FBQ1QsNEJBQVEsR0FBUixDQUFZLFdBQVUsSUFBdEI7QUFDQSx3QkFBSSxjQUFjO0FBQ2QsbUNBQVcsS0FERztBQUVkLDhCQUFNLElBRlE7QUFHZCxzQ0FBYztBQUhBLHFCQUFsQjs7QUFNQSx3QkFBSSxVQUFVLElBQUksT0FBSixDQUFZLFVBQUMsT0FBRCxFQUFVLE1BQVYsRUFBcUI7QUFDM0MsNEJBQUksS0FBSyxNQUFMLElBQWUsQ0FBbkIsRUFBc0I7QUFDbEIsb0NBQVEsR0FBUixDQUFZLHVDQUFaOztBQUVBLHdDQUFZLFlBQVosR0FBMkIsMkJBQTNCOztBQUVBLG1DQUFPLFdBQVA7QUFDSDs7QUFFRCw0QkFBSSxpQkFBaUIsNkJBQTZCLElBQWxEOztBQUVBLGdDQUFRLEdBQVIsQ0FBWSxjQUFaOztBQUVBLDhCQUFLLElBQUwsQ0FBVSxHQUFWLENBQWMsY0FBZCxFQUNLLElBREwsQ0FDVSx3QkFBZ0I7QUFDZCxvQ0FBUSxHQUFSLENBQVksWUFBWjs7QUFFQSxnQ0FBSSxjQUFjLEVBQUUsUUFBRixDQUFXLGFBQWEsUUFBeEIsQ0FBbEI7QUFDQSxnQ0FBSSxlQUFlLEVBQUUsV0FBRixDQUFuQjtBQUNBLGdDQUFJLGNBQWMsRUFBbEI7O0FBRUEseUNBQWEsSUFBYixDQUFrQixnQkFBbEIsRUFBb0MsSUFBcEMsQ0FBeUMsVUFBUyxDQUFULEVBQVksQ0FBWixFQUFjO0FBQ25ELDRDQUFZLElBQVosQ0FBaUIsRUFBRSxJQUFGLEVBQVEsSUFBUixFQUFqQjtBQUNILDZCQUZEOztBQUlBLG9DQUFRLEdBQVIsQ0FBWSxXQUFaOztBQUVBLHdDQUFZLElBQVosQ0FBaUIsVUFBUyxDQUFULEVBQVksQ0FBWixFQUFjO0FBQzVCLHVDQUFPLEVBQUUsTUFBRixHQUFXLEVBQUUsTUFBYixHQUFzQixDQUFDLENBQXZCLEdBQTJCLENBQWxDO0FBQ0YsNkJBRkQ7O0FBSUEsd0NBQVksU0FBWixHQUF3QixJQUF4QjtBQUNBLHdDQUFZLElBQVosR0FBbUIsV0FBbkI7O0FBRUEsb0NBQVEsV0FBUjtBQUNILHlCQXRCVCxFQXVCSyxLQXZCTCxDQXVCWSx3QkFBZ0I7QUFDaEIsb0NBQVEsR0FBUixDQUFZLFlBQVo7O0FBRUEsd0NBQVksWUFBWixHQUEyQiw0Q0FBNEMsSUFBdkU7O0FBRUEsbUNBQU8sV0FBUDtBQUNILHlCQTdCVDtBQThCSCxxQkEzQ2EsQ0FBZDs7QUE2Q0EsMkJBQU8sT0FBUDtBQUNILGlCIiwiZmlsZSI6IndvcmRuaWtTZXJ2aWNlLmpzIiwic291cmNlUm9vdCI6Ii9zcmMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndvcmRuaWtTZXJ2aWNlLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7QUFBUSxrQixxQkFBQSxNOztBQUNBLHNCLHNCQUFBLFU7OztzQ0FHSyxjLFdBRFosT0FBTyxVQUFQLEM7QUFFRyx3Q0FBYSxJQUFiLEVBQW1CO0FBQUE7O0FBQ2YseUJBQUssSUFBTCxHQUFZLElBQVo7O0FBRUEseUJBQUsscUJBQUwsR0FBNkIsbUNBQTdCO0FBRUg7O3lDQUVELE0sbUJBQU8sSSxFQUFNO0FBQUE7O0FBQ1QsNEJBQVEsR0FBUixDQUFZLFdBQVUsSUFBdEI7QUFDQSx3QkFBSSxjQUFjO0FBQ2QsbUNBQVcsS0FERztBQUVkLDhCQUFNLElBRlE7QUFHZCxzQ0FBYztBQUhBLHFCQUFsQjs7QUFNQSx3QkFBSSxVQUFVLElBQUksT0FBSixDQUFZLFVBQUMsT0FBRCxFQUFVLE1BQVYsRUFBcUI7QUFDM0MsNEJBQUksS0FBSyxNQUFMLElBQWUsQ0FBbkIsRUFBc0I7QUFDbEIsb0NBQVEsR0FBUixDQUFZLHVDQUFaOztBQUVBLHdDQUFZLFlBQVosR0FBMkIsMkJBQTNCOztBQUVBLG1DQUFPLFdBQVA7QUFDSDs7QUFFRCw0QkFBSSxvQkFBb0IsTUFBSyxxQkFBTCxHQUE2Qiw4QkFBN0IsR0FBOEQsSUFBOUQsR0FBcUUsY0FBN0Y7O0FBRUEsZ0NBQVEsR0FBUixDQUFZLGlCQUFaOztBQUVBLDhCQUFLLElBQUwsQ0FBVSxHQUFWLENBQWMsaUJBQWQsRUFDSyxJQURMLENBQ1Usd0JBQWdCOztBQUdkLGdDQUFJLGNBQWMsYUFBYSxPQUEvQjs7QUFFQSx3Q0FBWSxJQUFaLENBQWlCLFVBQVMsQ0FBVCxFQUFZLENBQVosRUFBYztBQUM1Qix1Q0FBTyxFQUFFLElBQUYsQ0FBTyxNQUFQLEdBQWdCLEVBQUUsSUFBRixDQUFPLE1BQXZCLEdBQWdDLENBQUMsQ0FBakMsR0FBcUMsQ0FBNUM7QUFDRiw2QkFGRDs7QUFJQSx3Q0FBWSxTQUFaLEdBQXdCLElBQXhCO0FBQ0Esd0NBQVksSUFBWixHQUFtQixXQUFuQjs7QUFFQSxvQ0FBUSxXQUFSO0FBQ0gseUJBZFQsRUFlSyxLQWZMLENBZVksd0JBQWdCO0FBQ2hCLG9DQUFRLEdBQVIsQ0FBWSxZQUFaOztBQUVBLHdDQUFZLFlBQVosR0FBMkIsNENBQTRDLElBQXZFOztBQUVBLG1DQUFPLFdBQVA7QUFDSCx5QkFyQlQ7QUFzQkgscUJBbkNhLENBQWQ7O0FBcUNBLDJCQUFPLE9BQVA7QUFDSCxpQiIsImZpbGUiOiJ3b3JkbmlrU2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiIvc3JjIn0=
