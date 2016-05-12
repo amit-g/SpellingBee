@@ -1,0 +1,26 @@
+<template>
+  <require from="./messages"></require>
+  
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Advanced</h3>
+    </div>
+    
+    <div class="panel-body">
+      
+      <messages view-model.ref="messages" class="clearfix"></messages> 
+      
+      <div class="form-group">
+        <label for="rt" class="control-label">Reset to Default</label>
+        <div class="input-group" show.bind="showConfirmText">
+          <span class="input-group-addon">Confirmation</span>
+          <input type="text" value.bind="cofirmationText" class="form-control" id="rt" placeholder="Type 'reset' to confirm">
+        </div>
+        <button type="button" click.delegate="resetSetup()" class="form-control btn btn-danger">Reset to Default</button>
+        <button type="button" click.delegate="cancelReset()" show.bind="showConfirmText" class="form-control btn btn-success">Cancel</button>
+      </div>
+
+    </div>
+    
+  </div>
+</template>

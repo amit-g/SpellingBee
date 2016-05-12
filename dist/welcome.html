@@ -1,0 +1,21 @@
+<template>
+  <section class="au-animate">
+    <h2></h2>
+    
+    <div class="container">
+      <div class="jumbotron">
+        <h1>${heading}</h1>
+        <p>
+          Here you can practice the spellings for your own list of words that can be loaded from a Google Sheet or a Gist.
+        </p>
+        <p>        
+          For loading the words from a Google Document, click on Setup and paste the Url of a <b>published</b> (<u>not shared</u>) Google Sheet.
+          The words are loaded from the first worksheet.
+        </p>
+        <div show.bind="!isSupported" class="alert alert-danger" role="alert">
+            <p>This browser doesn't support text to speech API. Please use Google Chrome.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

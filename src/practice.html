@@ -1,0 +1,80 @@
+<template>
+  <section class="au-animate">
+    <h2>${heading}</h2>
+    
+    <div class="well">
+      <form role="form" submit.delegate="submit()" class="form-horizontal">
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Listen to word and enter spelling</h3>
+          </div>
+          
+          <div class="panel-body">
+
+              <div class="form-group">
+                <label for="gSUrl" class="col-md-2 control-label"><!--Spelling--></label>
+                <div class="col-md-2">
+                    <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling">
+                </div>
+                <div class="col-md-6">
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check it</button>
+                    <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-info">Say again</button>
+                    <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
+                    <button type="button" click.delegate="getNextWord()" disabled.bind="!canPractice" class="btn btn-success">Next</button>
+                </div>
+              </div>
+              
+              <div class="form-group row" show.bind="showSpelling">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-6">
+                  <div class="panel panel-${spellingClassName}">
+                    <div class="panel-heading">${currentWord}</div>
+                    <div class="panel-body">
+                      <div repeat.for="definition of definitions">
+                          <div>${definition}</div>
+                          <hr class="${ $last ? 'hidden' : '' }" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+          
+          <div class="panel-footer">
+            <span class="label label-warning" show.bind="!canPractice">No words available to practice. Please click Setup and load words</span>
+            <span class="label label-info" show.bind="canPractice">${wordCount} words available to practice</span>
+          </div>
+          
+        </div>
+        
+      </form>
+      
+      <div class="row">
+        <div show.bind="isSuccess" class="alert alert-success col-md-6 col-md-offset-3">
+              <p>${message}</p>
+        </div>
+        <div show.bind="isError" class="alert alert-danger col-md-6 col-md-offset-3">
+              <p>${errorMessage}</p>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+</template>
