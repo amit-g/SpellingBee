@@ -8,7 +8,11 @@ export class LeaderBoard {
     constructor(appState) {
         this.appState = appState;
         
-        this._leaderBoard = (this.appState.leaderBoard && this.appState.leaderBoard.totalCount) || LeaderBoard.default;
+        this._leaderBoard = this.appState.leaderBoard || LeaderBoard.default;
+        
+        if (!this.appState.leaderBoard.totalCount) {
+            this._leaderBoard = LeaderBoard.default;
+        }
     }
     
     static get default() {
