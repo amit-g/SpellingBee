@@ -6,8 +6,8 @@ export class WordnikService {
     constructor (http) {
         this.http = http;
         
-        this.wordnikServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
-        //this.wordnikServiceBaseUrl = "";
+        //this.wordnikServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
+        this.wordnikServiceBaseUrl = "";
     }
     
     define(word) {
