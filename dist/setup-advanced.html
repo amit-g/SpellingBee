@@ -1,5 +1,6 @@
 <template>
   <require from="./messages"></require>
+  <require from="./confirmation"></require>
   
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -8,16 +9,21 @@
     
     <div class="panel-body">
       
-      <messages view-model.ref="messages" class="clearfix"></messages> 
-      
+      <messages class="clearfix" view-model.ref="messages"></messages>
+
+      <div class="form-group">
+        <label for="rt" class="control-label">Reset Scores</label>
+        <button type="button" click.delegate="resetScores()" class="form-control btn btn-warning">Reset Scores</button>
+      </div>
+                  
       <div class="form-group">
         <label for="rt" class="control-label">Reset to Default</label>
         <div class="input-group" show.bind="showConfirmText">
           <span class="input-group-addon">Confirmation</span>
-          <input type="text" value.bind="cofirmationText" class="form-control" id="rt" placeholder="Type 'reset' to confirm">
+          <input type="text" value.bind="enteredCofirmationText" class="form-control" id="rt" placeholder="Type '${confirmationText}' to confirm">
         </div>
         <button type="button" click.delegate="resetSetup()" class="form-control btn btn-danger">Reset to Default</button>
-        <button type="button" click.delegate="cancelReset()" show.bind="showConfirmText" class="form-control btn btn-success">Cancel</button>
+        <button type="button" click.delegate="cancelResetSetup()" show.bind="showConfirmText" class="form-control btn btn-success">Cancel</button>
       </div>
 
     </div>

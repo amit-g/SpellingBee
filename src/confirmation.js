@@ -1,16 +1,12 @@
-import {inject} from 'aurelia-framework';
-import {AppState} from 'appState';
+import {inject, bindable, bindingMode} from 'aurelia-framework';
 import {TextToSpeech} from 'textToSpeech';
 
-@inject(AppState, TextToSpeech)
-export class SetupAdvancedCustomElement {
-  heading = 'Setup Advanced';
-  confirmationText = "reset setup";
-  
+@inject(TextToSpeech)
+export class ConfirmationCustomElement {
   //TODO: How to inject this.messages???
-
-  constructor(appState, textToSpeech) {
-    this.appState = appState;
+  @bindable confirmationText = "";
+    
+  constructor(textToSpeech) {
     this.textToSpeech = textToSpeech;
     
     this.showConfirmText = false;
@@ -28,14 +24,8 @@ export class SetupAdvancedCustomElement {
       }
       else {
         if (this.enteredCofirmationText === this.confirmationText) {
-            this.appState.reset();
-            
-            let message = "'Reset Setup' completed.";
-            
-            this.messages.resetMessages();
-            this.messages.setMessage(message);
-            
-            this.showConfirmText = false;
+            //this.appState.reset();
+            console.log("****** reset done ********");
         }
         else {
             let message = "Please type '" + this.confirmationText + "' to confirm."
@@ -53,14 +43,6 @@ export class SetupAdvancedCustomElement {
     this.enteredCofirmationText = "";
 
     this.messages.resetMessages();
-  }
-  
-  resetScores() {
-    var confirmation = confirm("Are you sure to reset the scores?");
-    
-    if (confirmation) {
-      this.appState.leaderBoard = {};
-    }
   }
 
   attached() {

@@ -89,7 +89,7 @@ System.register(['aurelia-framework'], function (_export, _context) {
                 }, {
                     key: 'leaderBoard',
                     get: function get() {
-                        return this.getObject(AppStorage.storageKeys.leaderBoard, []);
+                        return this.getObject(AppStorage.storageKeys.leaderBoard, {});
                     },
                     set: function set(value) {
                         return this.setObject(AppStorage.storageKeys.leaderBoard, value);

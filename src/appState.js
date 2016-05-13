@@ -38,7 +38,7 @@ export class AppState {
     }
          
     get leaderBoard() {
-        return this.appStorage.leaderBoard || [];
+        return this.appStorage.leaderBoard || {};
     }
     
     set leaderBoard(value) {
@@ -67,9 +67,11 @@ export class AppState {
     // }
     
     reset() {
+        this.appStorage.clear();
+        
         this.googleSheetUrl = '';
         this.voiceName = 'native';
         this.wordMasterList = [];
-        this.leaderBoard = [];
+        this.leaderBoard = {};
     }
 }

@@ -46,7 +46,7 @@ export class AppStorage {
     }
   
     get leaderBoard() {
-        return this.getObject(AppStorage.storageKeys.leaderBoard, []);
+        return this.getObject(AppStorage.storageKeys.leaderBoard, {});
     }
     
     set leaderBoard(value) {

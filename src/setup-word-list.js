@@ -36,7 +36,7 @@ export class SetupWordListCustomElement {
           let message = this.appState.wordMasterList.length + ' words loaded from Google Sheet';
         
           this.textToSpeech.speak(message);
-          this.messages.setErrorMessage(message);
+          this.messages.setMessage(message);
       })
       .catch(promiseData => {
           console.log(promiseData);

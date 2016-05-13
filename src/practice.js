@@ -1,18 +1,20 @@
 import {inject} from 'aurelia-framework';
 import {AppState} from 'appState';
+import {LeaderBoard} from 'leaderBoard';
 import {RandomHelper} from 'randomHelper';
 import {TextToSpeech} from 'textToSpeech';
 import {WordDefinition} from 'wordDefinition';
 import {DictionaryService} from 'dictionaryService';
 import {WordnikService} from 'wordnikService';
 
-@inject('loDash', AppState, RandomHelper, TextToSpeech, DictionaryService, WordnikService)
+@inject('loDash', AppState, LeaderBoard, RandomHelper, TextToSpeech, DictionaryService, WordnikService)
 export class Practice {
   heading = 'Practice';
 
-  constructor(_, appState, randomHelper, textToSpeech, dictionaryService, wordnikService) {
+  constructor(_, appState, leaderBoard, randomHelper, textToSpeech, dictionaryService, wordnikService) {
     this._ = _;
     this.appState = appState;
+    this.leaderBoard = leaderBoard;
     this.randomHelper = randomHelper;
     this.textToSpeech = textToSpeech;
     this.dictionaryService = dictionaryService;
@@ -34,6 +36,8 @@ export class Practice {
   }
    
   submit() {
+    this.checkSpelling();
+    
     return false;
   }
   
@@ -66,6 +70,8 @@ export class Practice {
     else {
         this.textToSpeech.speak("Try again");
     }
+    
+    this.leaderBoard.update(this.isSpellingCorrect, this.currentWord);
   }
   
   speakWord() {
@@ -93,10 +99,12 @@ export class Practice {
         });
   }
   
-  displaySpelling() {
+  giveUpAndDisplaySpelling() {
     this.showSpelling = true;
     this.showDefinitions();
     this.speakWord();
+    
+    this.leaderBoard.update(false, this.currentWord);
   }
   
   getNextWord() {

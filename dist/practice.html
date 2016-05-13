@@ -13,11 +13,22 @@
           <div class="panel-body">
 
               <div class="form-group">
-                <label for="gSUrl" class="col-md-2 control-label"><!--Spelling--></label>
-                <div class="col-md-2">
-                    <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling">
+                <div class="col-md-4 col-md-offset-2 text-right">
+                  <span class="label label-success"><span class="glyphicon glyphicon-thumbs-up"></span> ${leaderBoard.correctCount}</span>
+                  <span class="label label-warning"><span class="glyphicon glyphicon-thumbs-down"></span> ${leaderBoard.incorrectCount}</span>
+                  <span class="label label-info"><span class="glyphicon glyphicon-certificate"></span> ${leaderBoard.totalCount}</span>
                 </div>
-                <div class="col-md-6">
+              </div>
+
+              <div class="form-group">
+                <label for="gSUrl" class="col-md-2 control-label"><!--Spelling--></label>
+                <div class="col-md-4">
+                    <div class="input-group">
+                      <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                      <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling">
+                    </div>
+                </div>
+                <div class="col-md-4">
                 </div>
               </div>
               
@@ -35,7 +46,7 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-1">
-                    <button type="button" click.delegate="displaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
+                    <button type="button" click.delegate="giveUpAndDisplaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
                 </div>
               </div>
               
