@@ -6,13 +6,8 @@ export class DictionaryService {
     constructor (http) {
         this.http = http;
         
-<<<<<<< HEAD
         this.dictServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
         //this.dictServiceBaseUrl = "";
-=======
-        //this.dictServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
-        this.dictServiceBaseUrl = "";
->>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     }
     
     define(word) {
@@ -38,17 +33,12 @@ export class DictionaryService {
 
             this.http.get(dictServiceUrl)
                 .then(httpResponse => {
-<<<<<<< HEAD
                         //console.log(httpResponse);
-=======
-                        console.log(httpResponse);
->>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
                         
                         var xmlResponse = $.parseXML(httpResponse.response);
                         var $xmlResponse = $(xmlResponse);
                         var definitions = [];
                         
-<<<<<<< HEAD
                         $xmlResponse.find("Definition").each(function(i, e) {
                             var text = $(this).find("WordDefinition").first().text();
                             var dictionaryID = $(this).find("Dictionary Id").first().text();
@@ -67,16 +57,6 @@ export class DictionaryService {
                         
                         definitions.sort(function(a, b){
                            return a.text.length < b.text.length ? -1 : 1; 
-=======
-                        $xmlResponse.find("WordDefinition").each(function(i, e){
-                            definitions.push($(this).text());
-                        });
-
-                        console.log(definitions);
-                        
-                        definitions.sort(function(a, b){
-                           return a.length < b.length ? -1 : 1; 
->>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
                         });
                         
                         promiseData.isSuccess = true;

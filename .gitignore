@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 # Local Ignores
 rewriteRules.config
 
-=======
->>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
 # Aurelia
 
 node_modules

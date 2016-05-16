@@ -1,6 +1,5 @@
 <template>
   <require from="./messages"></require>
-<<<<<<< HEAD
   <require from="./confirmation"></require>
   
   <div class="panel panel-primary">
@@ -19,33 +18,14 @@
         <button type="button" click.delegate="resetScores()" class="form-control btn btn-warning">Reset Scores</button>
       </div>
                   
-=======
-  
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Advanced</h3>
-    </div>
-    
-    <div class="panel-body">
-      
-      <messages view-model.ref="messages" class="clearfix"></messages> 
-      
->>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
       <div class="form-group">
         <label for="rt" class="control-label">Reset to Default</label>
         <div class="input-group" show.bind="showConfirmText">
           <span class="input-group-addon">Confirmation</span>
-<<<<<<< HEAD
           <input type="text" value.bind="enteredCofirmationText" class="form-control" id="rt" placeholder="Type '${confirmationText}' to confirm">
         </div>
         <button type="button" click.delegate="resetSetup()" class="form-control btn btn-danger">Reset to Default</button>
         <button type="button" click.delegate="cancelResetSetup()" show.bind="showConfirmText" class="form-control btn btn-success">Cancel</button>
-=======
-          <input type="text" value.bind="cofirmationText" class="form-control" id="rt" placeholder="Type 'reset' to confirm">
-        </div>
-        <button type="button" click.delegate="resetSetup()" class="form-control btn btn-danger">Reset to Default</button>
-        <button type="button" click.delegate="cancelReset()" show.bind="showConfirmText" class="form-control btn btn-success">Cancel</button>
->>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
       </div>
 
     </div>
