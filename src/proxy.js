@@ -1,3 +1,4 @@
+/*
 var http = require('http');
 var xml2js = require('xml2js');
 var Transform = require('stream').Transform;
@@ -56,3 +57,4 @@ function onRequest(client_req, client_res) {
     end: true
   });
 }
+*/
