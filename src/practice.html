@@ -43,7 +43,7 @@
                         <span class="badge" show.bind="definitionsCount > 0">${definitionIndex + 1}/${definitionsCount} </span>
                         <span>Define</span>
                       </button>
-                      <button type="button" disabled.bind="!canPractice" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                      <button type="button" disabled.bind="!canPractice || (definitionsCount <= 0)" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu">
