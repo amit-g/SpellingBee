@@ -1,5 +1,26 @@
 import {inject} from 'aurelia-framework';
 import {AppState} from 'appState';
+<<<<<<< HEAD
+import {LeaderBoard} from 'leaderBoard';
+import {RandomHelper} from 'randomHelper';
+import {TextToSpeech} from 'textToSpeech';
+import {WordDefinition} from 'wordDefinition';
+import {DictionaryService} from 'dictionaryService';
+import {WordnikService} from 'wordnikService';
+
+@inject('loDash', AppState, LeaderBoard, RandomHelper, TextToSpeech, DictionaryService, WordnikService)
+export class Practice {
+  heading = 'Practice';
+
+  constructor(_, appState, leaderBoard, randomHelper, textToSpeech, dictionaryService, wordnikService) {
+    this._ = _;
+    this.appState = appState;
+    this.leaderBoard = leaderBoard;
+    this.randomHelper = randomHelper;
+    this.textToSpeech = textToSpeech;
+    this.dictionaryService = dictionaryService;
+    this.wordnikService = wordnikService;
+=======
 import {RandomHelper} from 'randomHelper';
 import {TextToSpeech} from 'textToSpeech';
 import {DictionaryService} from 'dictionaryService';
@@ -13,6 +34,7 @@ export class Practice {
     this.randomHelper = randomHelper;
     this.textToSpeech = textToSpeech;
     this.dictionaryService = dictionaryService;
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     
     this.spelling = "";
     this.showSpelling = false;
@@ -20,6 +42,10 @@ export class Practice {
     this.currentWord = "";
     
     this.definitions = [];
+<<<<<<< HEAD
+    this.definitionIndex = -1;
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     
     this.isSuccess = false;
     this.isError = false;
@@ -29,6 +55,11 @@ export class Practice {
   }
    
   submit() {
+<<<<<<< HEAD
+    this.checkSpelling();
+    
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     return false;
   }
   
@@ -40,6 +71,13 @@ export class Practice {
     return this.appState.wordMasterList.length;
   }
   
+<<<<<<< HEAD
+  get definitionsCount() {
+    return this.definitions.length;
+  }
+  
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   get isSpellingValid() {
       return this.spelling.length > 0;
   }
@@ -61,22 +99,110 @@ export class Practice {
     else {
         this.textToSpeech.speak("Try again");
     }
+<<<<<<< HEAD
+    
+    this.leaderBoard.update(this.isSpellingCorrect, this.currentWord);
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
   
   speakWord() {
     this.textToSpeech.speak(this.currentWord);
   }
+<<<<<<< HEAD
+
+  speakDefinition() {
+    if (this.definitionIndex >= 0 && this.definitionIndex < this.definitions.length) {
+      var definition = this.definitions[this.definitionIndex];
+      
+      if (definition.partOfSpeech) {
+        this.textToSpeech.speak(definition.partOfSpeech);
+      }
+
+      this.textToSpeech.speak(definition.text);
+    }   
+  }
+  
+  fetchOrNextDefinition() {
+    if (this.definitions.length > 0) {
+      this.nextDefinition();
+    }
+    else {
+      this.populateDefinitions()
+        .then(promiseData => {
+          this.speakDefinition();
+        });
+    }
+  }
+
+  incrementDecrementDefinitionIndex(howMany) {
+    if (this.definitions.length <= 0) {
+      return false;
+    }
+    
+    this.definitionIndex += howMany;
+    
+    if (this.definitionIndex < 0) {
+      this.definitionIndex = this.definitions.length;
+    }
+    else if (this.definitionIndex >= this.definitions.length) {
+      this.definitionIndex = 0;
+    }
+    
+    return true;
+  }
+
+  firstDefinition() {
+    if (this.definitions.length > 0) {
+      this.definitionIndex = 0;
+      
+      this.speakDefinition();
+    }
+  }
+  
+  nextDefinition() {
+    if (this.incrementDecrementDefinitionIndex(1)) {
+      this.speakDefinition();
+    }
+  }
+  
+  previousDefinition() {
+    if (this.incrementDecrementDefinitionIndex(-1)) {
+      this.speakDefinition();
+    }
+  }
+
+  lastDefinition() {
+    if (this.definitions.length > 0) {
+      this.definitionIndex = this.definitions.length - 1;
+      
+      this.speakDefinition();
+    }
+  }
+  
+  giveUpAndDisplaySpelling() {
+    this.showSpelling = true;
+    this.showDefinitions();
+    this.speakWord();
+    
+    this.leaderBoard.update(false, this.currentWord);
+=======
   
   displaySpelling() {
     this.showSpelling = true;
     this.showDefinitions();
     this.speakWord();
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
   
   getNextWord() {
     this.spelling = "";
     this.showSpelling = false;
     this.definitions.length = 0;
+<<<<<<< HEAD
+    this.definitionIndex = -1;
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     this.currentWordIndex = this.randomHelper.getRandomInt(0, this.appState.wordMasterList.length);
     this.currentWord = this.appState.wordMasterList[this.currentWordIndex];
 
@@ -101,6 +227,35 @@ export class Practice {
   }
   
   showDefinitions(){
+<<<<<<< HEAD
+    this.populateDefinitions();
+  }
+  
+  populateDefinitions(){
+    var promise = Promise.resolve();
+    
+    if (this.definitions.length == 0) {
+      promise = this.wordnikService.define(this.currentWord)
+        .then(promiseData => {
+            //console.log(promiseData);
+            this.definitions.length = 0;
+            this.definitionIndex = 0;
+
+            //Array.prototype.push.apply(this.definitions, promiseData.data);
+            this.definitions = this._.map(promiseData.data, function(d) {
+                return new WordDefinition(d);                
+            });
+        })
+        .catch(promiseData => {
+            console.log(promiseData);
+            this.definitions.length = 0;
+            this.definitionIndex = -1;
+            this.setErrorMessage(promiseData.errorMessage);
+        });
+    }
+      
+    return promise;    
+=======
     if (this.definitions.length == 0){
       this.populateDefinitions();
     } 
@@ -117,6 +272,7 @@ export class Practice {
           console.log(promiseData);
           this.setErrorMessage(promiseData.errorMessage);
       });
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
 
   activate() {
@@ -127,4 +283,8 @@ export class Practice {
           this.getNextWord();
       }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e

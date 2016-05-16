@@ -1,0 +1,11 @@
+<template>
+    <div class="form-group">
+        <label for="rt" class="control-label">Reset to Default</label>
+        <div class="input-group" show.bind="showConfirmText">
+            <span class="input-group-addon">Confirmation</span>
+            <input type="text" value.bind="enteredCofirmationText" class="form-control" id="rt" placeholder="Type '${cofirmationText}' to confirm">
+        </div>
+        <button type="button" click.delegate="resetSetup()" class="form-control btn btn-danger">Reset to Default</button>
+        <button type="button" click.delegate="cancelResetSetup()" show.bind="showConfirmText" class="form-control btn btn-success">Cancel</button>
+    </div>
+</template>

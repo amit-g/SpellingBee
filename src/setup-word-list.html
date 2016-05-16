@@ -3,10 +3,19 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
+<<<<<<< HEAD
+      <h3 class="panel-title">
+        <a href="#wordListSources" data-toggle="collapse">Word List Source</a>
+      </h3>
+    </div>
+    
+    <div class="panel-body collapse" id="wordListSources">
+=======
       <h3 class="panel-title">Word List Source</h3>
     </div>
     
     <div class="panel-body">
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
       
       <div class="form-group">
         <label for="gSUrl" class="control-label">Google Sheet Url</label>
@@ -14,6 +23,12 @@
           <span class="input-group-addon">Url</span>
           <input type="text" value.bind="googleSheetUrl" class="form-control" id="gsu" placeholder="Google sheet url">
         </div>
+<<<<<<< HEAD
+      </div>
+
+      <div class="form-group">
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
         <button type="button" click.delegate="loadWordsFromGoogleSheet()" disabled.bind="!isGoogleSheetUrlValid" class="form-control btn btn-primary">Load from Google Sheet</button>
       </div>
       
@@ -24,10 +39,22 @@
           <span class="input-group-addon">Url</span>
           <input type="text" value.bind="gistUrl" class="form-control" id="gu" placeholder="Gist Url">
         </div>
+<<<<<<< HEAD
+      </div>
+
+      <div class="form-group">
+        <button type="button" click.delegate="loadWordsFromGist()" disabled.bind="!isGistUrlValid" class="form-control btn btn-primary">Load from Gist (Coming soon...)</button>
+      </div>
+      
+      <div class="form-group">
+        <messages view-model.ref="messages"></messages>
+      </div>
+=======
         <button type="button" click.delegate="loadWordsFromGist()" disabled.bind="!isGistUrlValid" class="form-control btn btn-primary">Load from Gist</button>
       </div>
       
       <messages view-model.ref="messages"></messages> 
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
 
     </div>
     

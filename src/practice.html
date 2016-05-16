@@ -1,8 +1,15 @@
 <template>
   <section class="au-animate">
+<<<<<<< HEAD
+    <h2 class="visible-md visible-lg">${heading}</h2>
+    <div class="hidden-md hidden-lg clearfix">&nbsp;</div>
+    
+    <div class="">
+=======
     <h2>${heading}</h2>
     
     <div class="well">
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
       <form role="form" submit.delegate="submit()" class="form-horizontal">
 
         <div class="panel panel-primary">
@@ -13,15 +20,79 @@
           <div class="panel-body">
 
               <div class="form-group">
+<<<<<<< HEAD
+                <div class="col-md-5 col-md-offset-2 text-right">
+                  <span class="label label-success"><span class="glyphicon glyphicon-thumbs-up"></span> ${leaderBoard.correctCount}</span>
+                  <span class="label label-warning"><span class="glyphicon glyphicon-thumbs-down"></span> ${leaderBoard.incorrectCount}</span>
+                  <span class="label label-info"><span class="glyphicon glyphicon-certificate"></span> ${leaderBoard.totalCount}</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-3 col-sm-8 col-xs-8 col-md-offset-2">
+                    <div class="input-group">
+                      <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                      <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-4 text-right">
+                    <button type="button" click.delegate="checkSpelling()" disabled.bind="!isSpellingValid" class="btn btn-primary">Check</button>
+=======
                 <label for="gSUrl" class="col-md-2 control-label"><!--Spelling--></label>
                 <div class="col-md-2">
                     <input type="text" value.bind="spelling" disabled.bind="!canPractice" class="form-control" id="spl" placeholder="Enter spelling">
                 </div>
                 <div class="col-md-6">
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
                 </div>
               </div>
               
               <div class="form-group row">
+<<<<<<< HEAD
+                <div class="col-md-2 col-md-offset-2 col-xs-3">
+                    <button type="button" click.delegate="speakWord()" disabled.bind="!canPractice" class="btn btn-info">Say again</button>
+                </div>
+                <div class="col-md-3 col-xs-9 text-right">
+                    <div class="btn-group">
+                      <button type="button" click.delegate="fetchOrNextDefinition()" disabled.bind="!canPractice" class="btn btn-info">
+                        <span class="badge" show.bind="definitionsCount > 0">${definitionIndex + 1}/${definitionsCount} </span>
+                        <span>Define</span>
+                      </button>
+                      <button type="button" disabled.bind="!canPractice" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a href="#" click.delegate="firstDefinition()" disabled.bind="!canPractice">
+                            <span class="glyphicon glyphicon-fast-backward"></span> First
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" click.delegate="nextDefinition()" disabled.bind="!canPractice">
+                            <span class="glyphicon glyphicon-step-forward"></span> Next
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" click.delegate="previousDefinition()" disabled.bind="!canPractice">
+                            <span class="glyphicon glyphicon-step-backward"></span> Previous
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" click.delegate="lastDefinition()" disabled.bind="!canPractice">
+                            <span class="glyphicon glyphicon-fast-forward"></span> Last
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <div class="col-md-2 col-md-offset-2 col-xs-3">
+                    <button type="button" click.delegate="giveUpAndDisplaySpelling()" disabled.bind="!canPractice" class="btn btn-warning">Don't know</button>
+                </div>
+                <div class="col-md-3 col-xs-9 text-right">
+=======
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-4">
@@ -35,19 +106,33 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-1">
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
                     <button type="button" click.delegate="getNextWord()" disabled.bind="!canPractice" class="btn btn-success">Next</button>
                 </div>
               </div>
               
               <div class="form-group row" show.bind="showSpelling">
+<<<<<<< HEAD
+                <div class="col-md-7 col-md-offset-2">
+=======
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-6">
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
                   <div class="panel panel-${spellingClassName}">
                     <div class="panel-heading">${currentWord}</div>
                     <div class="panel-body">
                       <div repeat.for="definition of definitions">
+<<<<<<< HEAD
+                          <div>
+                            <span class="badge" >${$index + 1} </span>
+                            ${definition.displayText}
+                          </div>
+                          <br/>
+                          <div class="pull-right small text-muted">${definition.attributionText}</div>
+=======
                           <div>${definition}</div>
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
                           <hr class="${ $last ? 'hidden' : '' }" />
                       </div>
                     </div>
