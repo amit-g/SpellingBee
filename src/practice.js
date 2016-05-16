@@ -49,6 +49,10 @@ export class Practice {
     return this.appState.wordMasterList.length;
   }
   
+  get definitionsCount() {
+    return this.definitions.length;
+  }
+  
   get isSpellingValid() {
       return this.spelling.length > 0;
   }
@@ -77,26 +81,74 @@ export class Practice {
   speakWord() {
     this.textToSpeech.speak(this.currentWord);
   }
-  
-  speakDefinition() {
-    this.populateDefinitions()
-        .then(promiseData => {
-          if (this.definitionIndex >= 0 && this.definitionIndex < this.definitions.length) {
-            var definition = this.definitions[this.definitionIndex];
-            
-            if (definition.partOfSpeech) {
-              this.textToSpeech.speak(definition.partOfSpeech);
-            }
 
-            this.textToSpeech.speak(definition.text);
-            
-            this.definitionIndex++;
-            
-            if (this.definitionIndex >= this.definitions.length) {
-              this.definitionIndex = 0;
-            }
-          }          
+  speakDefinition() {
+    if (this.definitionIndex >= 0 && this.definitionIndex < this.definitions.length) {
+      var definition = this.definitions[this.definitionIndex];
+      
+      if (definition.partOfSpeech) {
+        this.textToSpeech.speak(definition.partOfSpeech);
+      }
+
+      this.textToSpeech.speak(definition.text);
+    }   
+  }
+  
+  fetchOrNextDefinition() {
+    if (this.definitions.length > 0) {
+      this.nextDefinition();
+    }
+    else {
+      this.populateDefinitions()
+        .then(promiseData => {
+          this.speakDefinition();
         });
+    }
+  }
+
+  incrementDecrementDefinitionIndex(howMany) {
+    if (this.definitions.length <= 0) {
+      return false;
+    }
+    
+    this.definitionIndex += howMany;
+    
+    if (this.definitionIndex < 0) {
+      this.definitionIndex = this.definitions.length;
+    }
+    else if (this.definitionIndex >= this.definitions.length) {
+      this.definitionIndex = 0;
+    }
+    
+    return true;
+  }
+
+  firstDefinition() {
+    if (this.definitions.length > 0) {
+      this.definitionIndex = 0;
+      
+      this.speakDefinition();
+    }
+  }
+  
+  nextDefinition() {
+    if (this.incrementDecrementDefinitionIndex(1)) {
+      this.speakDefinition();
+    }
+  }
+  
+  previousDefinition() {
+    if (this.incrementDecrementDefinitionIndex(-1)) {
+      this.speakDefinition();
+    }
+  }
+
+  lastDefinition() {
+    if (this.definitions.length > 0) {
+      this.definitionIndex = this.definitions.length - 1;
+      
+      this.speakDefinition();
+    }
   }
   
   giveUpAndDisplaySpelling() {

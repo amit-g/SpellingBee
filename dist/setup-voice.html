@@ -1,10 +1,12 @@
 <template>
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">Voices</h3>
+      <h3 class="panel-title">
+        <a href="#voices" data-toggle="collapse">Voices</a>
+      </h3>
     </div>
     
-    <div class="panel-body">
+    <div class="panel-body collapse" id="voices">
       <div class="form-group">
         <label for="st" class="control-label">Sample Text</label>
         <input type="text" value.bind="sampleText" class="form-control" id="st" placeholder="Sample text to speak">
