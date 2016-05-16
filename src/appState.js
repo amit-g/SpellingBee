@@ -38,7 +38,11 @@ export class AppState {
     }
          
     get leaderBoard() {
+<<<<<<< HEAD
         return this.appStorage.leaderBoard || {};
+=======
+        return this.appStorage.leaderBoard || [];
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     }
     
     set leaderBoard(value) {
@@ -67,11 +71,18 @@ export class AppState {
     // }
     
     reset() {
+<<<<<<< HEAD
         this.appStorage.clear();
         
         this.googleSheetUrl = '';
         this.voiceName = 'native';
         this.wordMasterList = [];
         this.leaderBoard = {};
+=======
+        this.googleSheetUrl = '';
+        this.voiceName = 'native';
+        this.wordMasterList = [];
+        this.leaderBoard = [];
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     }
 }

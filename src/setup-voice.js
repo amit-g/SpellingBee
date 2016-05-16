@@ -1,6 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {AppState} from 'appState';
 import {TextToSpeech} from 'textToSpeech';
+<<<<<<< HEAD
 import {RandomHelper} from 'randomHelper';
 
 @inject(AppState, TextToSpeech, RandomHelper, 'window')
@@ -19,17 +20,35 @@ export class SetupVoiceCustomElement {
     this.appState = appState;
     this.textToSpeech = textToSpeech;
     this.randomHelper = randomHelper;
+=======
+
+@inject(AppState, TextToSpeech, 'window')
+export class SetupVoiceCustomElement {
+  heading = 'Setup Voice';
+
+  constructor(appState, textToSpeech, window) {
+    this.appState = appState;
+    this.textToSpeech = textToSpeech;
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     this.window = window;
     
     this.voices = [];
     this.currentVoiceName = this.appState.voiceName;
+<<<<<<< HEAD
     this.sampleText = "Hello, this is how I speak.";
+=======
+    this.sampleText = "Hello, this is how I speak";
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
   
   playVoice(index) {
       let message = this.sampleText;
       this.textToSpeech.speak(message, this.voices[index]);
+<<<<<<< HEAD
       message = "I am using " + this.voices[index].name + " voice to read the text.";
+=======
+      message = "I am using " + this.voices[index].name + " voice";
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
       this.textToSpeech.speak(message, this.voices[index]);
   }
 
@@ -51,7 +70,10 @@ export class SetupVoiceCustomElement {
               this.window.setTimeout(() => this.populateVoices(), 100);
           }      
       }
+<<<<<<< HEAD
       
       this.sampleText = this._sampleTexts[this.randomHelper.getRandomInt(0, this._sampleTexts.length)];
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
 }

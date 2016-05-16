@@ -1,5 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {AppState} from 'appState';
+<<<<<<< HEAD
 import {LeaderBoard} from 'leaderBoard';
 import {RandomHelper} from 'randomHelper';
 import {TextToSpeech} from 'textToSpeech';
@@ -19,6 +20,21 @@ export class Practice {
     this.textToSpeech = textToSpeech;
     this.dictionaryService = dictionaryService;
     this.wordnikService = wordnikService;
+=======
+import {RandomHelper} from 'randomHelper';
+import {TextToSpeech} from 'textToSpeech';
+import {DictionaryService} from 'dictionaryService';
+
+@inject(AppState, RandomHelper, TextToSpeech, DictionaryService)
+export class Practice {
+  heading = 'Practice';
+
+  constructor(appState, randomHelper, textToSpeech, dictionaryService) {
+    this.appState = appState;
+    this.randomHelper = randomHelper;
+    this.textToSpeech = textToSpeech;
+    this.dictionaryService = dictionaryService;
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     
     this.spelling = "";
     this.showSpelling = false;
@@ -26,7 +42,10 @@ export class Practice {
     this.currentWord = "";
     
     this.definitions = [];
+<<<<<<< HEAD
     this.definitionIndex = -1;
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     
     this.isSuccess = false;
     this.isError = false;
@@ -36,8 +55,11 @@ export class Practice {
   }
    
   submit() {
+<<<<<<< HEAD
     this.checkSpelling();
     
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     return false;
   }
   
@@ -49,10 +71,13 @@ export class Practice {
     return this.appState.wordMasterList.length;
   }
   
+<<<<<<< HEAD
   get definitionsCount() {
     return this.definitions.length;
   }
   
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   get isSpellingValid() {
       return this.spelling.length > 0;
   }
@@ -74,13 +99,17 @@ export class Practice {
     else {
         this.textToSpeech.speak("Try again");
     }
+<<<<<<< HEAD
     
     this.leaderBoard.update(this.isSpellingCorrect, this.currentWord);
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
   
   speakWord() {
     this.textToSpeech.speak(this.currentWord);
   }
+<<<<<<< HEAD
 
   speakDefinition() {
     if (this.definitionIndex >= 0 && this.definitionIndex < this.definitions.length) {
@@ -157,13 +186,23 @@ export class Practice {
     this.speakWord();
     
     this.leaderBoard.update(false, this.currentWord);
+=======
+  
+  displaySpelling() {
+    this.showSpelling = true;
+    this.showDefinitions();
+    this.speakWord();
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
   
   getNextWord() {
     this.spelling = "";
     this.showSpelling = false;
     this.definitions.length = 0;
+<<<<<<< HEAD
     this.definitionIndex = -1;
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
     this.currentWordIndex = this.randomHelper.getRandomInt(0, this.appState.wordMasterList.length);
     this.currentWord = this.appState.wordMasterList[this.currentWordIndex];
 
@@ -188,6 +227,7 @@ export class Practice {
   }
   
   showDefinitions(){
+<<<<<<< HEAD
     this.populateDefinitions();
   }
   
@@ -215,6 +255,24 @@ export class Practice {
     }
       
     return promise;    
+=======
+    if (this.definitions.length == 0){
+      this.populateDefinitions();
+    } 
+  }
+  
+  populateDefinitions(){
+    this.definitions.length = 0;
+    this.dictionaryService.define(this.currentWord)
+      .then(promiseData => {
+          console.log(promiseData);
+          Array.prototype.push.apply(this.definitions, promiseData.data);
+      })
+      .catch(promiseData => {
+          console.log(promiseData);
+          this.setErrorMessage(promiseData.errorMessage);
+      });
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
   }
 
   activate() {
@@ -225,4 +283,8 @@ export class Practice {
           this.getNextWord();
       }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e

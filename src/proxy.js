@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
 var http = require('http');
 var xml2js = require('xml2js');
 var Transform = require('stream').Transform;
@@ -56,5 +59,9 @@ function onRequest(client_req, client_res) {
   client_req.pipe(proxy, {
     end: true
   });
+<<<<<<< HEAD
 }
 */
+=======
+}
+>>>>>>> 6d32f1bca6b7df771899cc4f865376193423ec3e
