@@ -1,5 +1,5 @@
 # Local Ignores
-web.config
+rewriteRules.config
 
 # Aurelia
 

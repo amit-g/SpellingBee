@@ -1,13 +1,17 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 
-@inject(HttpClient)
+@inject(HttpClient, 'window')
 export class WordnikService {
     constructor (http) {
         this.http = http;
+        this.window = window;
         
-        //this.wordnikServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
-        this.wordnikServiceBaseUrl = "";
+        this.wordnikServiceBaseUrl = "";            
+        
+        if ((this.window.location.port !== "") && (this.window.location.port !== "80")) {
+            this.wordnikServiceBaseUrl = "http://localhost/SpellingBee-Dev/";
+        }
     }
     
     define(word) {
